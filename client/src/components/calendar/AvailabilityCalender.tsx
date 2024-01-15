@@ -3,7 +3,9 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './calendar.scss';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Box, Button, CircularProgress, DialogTitle } from '@mui/material';
+import { Box, Button } from '@mui/material';
+
+import CircularProgress from '@mui/material/CircularProgress';
 import CustomModal from '../modals/CustomModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import createAbortController from '../../utils/createAbortController';
@@ -191,21 +193,27 @@ const WeekCalender = ({ value, getActionData }: CalendarProps) => {
             >
               Cancel
             </Button>
-            <Button
-              sx={{
-                color: '#ffffff',
-                backgroundColor: '#4F7942',
-                '&:hover': {
-                  color: '#4F7942'
-                },
-                borderRadius: '6px',
-                paddingX: '24px'
-              }}
-              onClick={submitAvailability}
-              autoFocus
-            >
-              Confirm
-            </Button>
+            {loading ? (
+              <Button autoFocus>
+                <CircularProgress size="18px" sx={{ color: '#4F7942' }} />
+              </Button>
+            ) : (
+              <Button
+                sx={{
+                  color: '#ffffff',
+                  backgroundColor: '#4F7942',
+                  '&:hover': {
+                    color: '#4F7942'
+                  },
+                  borderRadius: '6px',
+                  paddingX: '24px'
+                }}
+                onClick={submitAvailability}
+                autoFocus
+              >
+                Confirm
+              </Button>
+            )}
           </Box>
         </Box>
       </CustomModal>
@@ -245,21 +253,28 @@ const WeekCalender = ({ value, getActionData }: CalendarProps) => {
             >
               Cancel
             </Button>
-            <Button
-              sx={{
-                color: '#ffffff',
-                backgroundColor: '#C04000',
-                '&:hover': {
-                  color: '#C04000'
-                },
-                borderRadius: '6px',
-                paddingX: '24px'
-              }}
-              onClick={(event) => deleteAvailabilitySlot(eventId)}
-              autoFocus
-            >
-              Delete
-            </Button>
+
+            {loading ? (
+              <Button autoFocus>
+                <CircularProgress size="18px" sx={{ color: '#4F7942' }} />
+              </Button>
+            ) : (
+              <Button
+                sx={{
+                  color: '#ffffff',
+                  backgroundColor: '#C04000',
+                  '&:hover': {
+                    color: '#C04000'
+                  },
+                  borderRadius: '6px',
+                  paddingX: '24px'
+                }}
+                onClick={(event) => deleteAvailabilitySlot(eventId)}
+                autoFocus
+              >
+                Delete
+              </Button>
+            )}
           </Box>
         </Box>
       </CustomModal>

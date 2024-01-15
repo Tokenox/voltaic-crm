@@ -20,6 +20,7 @@ const plannerSlice = createSlice({
     });
     builder.addCase(getPlanners.fulfilled, (state, action) => {
       state.data = action.payload;
+      state.loading = false;
       state.events = action.payload.items.map((planner) => {
         return {
           id: planner._id,
@@ -33,6 +34,7 @@ const plannerSlice = createSlice({
       });
     });
     builder.addCase(getPlanners.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.error;
     });
 
@@ -42,9 +44,11 @@ const plannerSlice = createSlice({
     });
     builder.addCase(createPlanner.fulfilled, (state, action) => {
       state.data = action.payload;
+      state.loading = false;
     });
     builder.addCase(createPlanner.rejected, (state, action) => {
       state.error = action.error;
+      state.loading = false;
     });
 
     // Delete Planner
@@ -53,9 +57,11 @@ const plannerSlice = createSlice({
     });
     builder.addCase(deletePlanner.fulfilled, (state, action) => {
       state.data = action.payload;
+      state.loading = false;
     });
     builder.addCase(deletePlanner.rejected, (state, action) => {
       state.error = action.error;
+      state.loading = false;
     });
   }
 });
